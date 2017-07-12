@@ -2689,6 +2689,23 @@ class PageNNMA(QtWidgets.QWidget):
 
 
 #---------------------------------------------------------------------- 
+class PageParticleAnalysis(QtWidgets.QWidget):
+    def __init__(self, common, data_struct, stack, anlz, nnma):
+        super(PageParticleAnalysis, self).__init__()
+
+        self.initUI(common, data_struct, stack)
+        
+    def initUI(self, common, data_struct, stack): 
+    
+        self.data_struct = data_struct
+        self.stk = stack
+        self.com = common                  
+        
+        self.filename = " "
+        
+        self.iev = 0
+        self.itheta = 0
+#----------------------------------------------------------------------
 class SaveWinP5(QtWidgets.QDialog):
 
     def __init__(self, parent):    
@@ -14266,7 +14283,7 @@ class MainFrame(QtWidgets.QMainWindow):
         self.page5 = PagePeakID(self.common, self.data_struct, self.stk, self.anlz)
         self.page6 = PageXrayPeakFitting(self.common, self.data_struct, self.stk, self.anlz)
         self.page7 = PageNNMA(self.common, self.data_struct, self.stk, self.anlz, self.nnma)
-        
+        self.page9 = PageParticleAnalysis(self.common, self.data_struct, self.stk, self.anlz, self.nnma)
         
         tabs.addTab(self.page0,"Load Data")
         tabs.addTab(self.page1,"Preprocess Data")
@@ -14280,6 +14297,8 @@ class MainFrame(QtWidgets.QMainWindow):
         if showtomotab:
             self.page8 = PageTomo(self.common, self.data_struct, self.stk, self.anlz)
             tabs.addTab(self.page8, "Tomography")  
+        
+        tabs.addTab(self.page9, "Particle Analysis")
             
         if sys.platform == 'win32':
             tabs.setMinimumHeight(750)
@@ -14296,7 +14315,7 @@ class MainFrame(QtWidgets.QMainWindow):
         tabs.tabBar().setTabTextColor(7, QtGui.QColor('purple')) 
         if showtomotab:
             tabs.tabBar().setTabTextColor(8, QtGui.QColor('darkblue')) 
-
+        tabs.tabBar().setTabTextColor(9, QtGui.QColor('darkblue'))
        
         
         
